@@ -1,0 +1,6 @@
+{
+  "name": "Cendekia Corner Syariah",
+  "description": "Aplikasi Pembiayaan Syariah Pegawai untuk Koperasi Cendekia Corner Syariah di Sekolah Cendekia BAZNAS.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
