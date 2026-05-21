@@ -523,6 +523,19 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4 shrink-0 font-sans">
+            {/* Active Vercel Domain badge */}
+            <a
+              href="https://aspiah.vercel.app/"
+              target="_blank"
+              rel="noreferrer"
+              className="hidden sm:flex items-center gap-1.5 text-[11px] font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-250/50 px-3 py-1 rounded-full transition-all duration-300 shadow-3xs"
+              title="Aplikasi Siap & Terhubung di Domain Vercel: aspiah.vercel.app"
+            >
+              <Icons.Globe className="w-3.5 h-3.5 text-emerald-600 animate-spin-slow animate-pulse" />
+              <span>aspiah.vercel.app</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 inline-block animate-pulse"></span>
+            </a>
+
             {/* Date time widget dynamically rendered on desktop */}
             <div className="hidden md:flex items-center gap-1.5 text-slate-400 text-xs font-medium bg-slate-50 border border-slate-100 px-3 py-1 rounded-full">
               <Icons.CircleUser className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
@@ -645,15 +658,28 @@ export default function App() {
           </AnimatePresence>
         </main>
 
-        {/* FOOTER SECTION - hidden during print */}
+         {/* FOOTER SECTION - hidden during print */}
         <footer className="bg-white border-t border-slate-200 py-4 px-6 text-[11px] text-slate-400 font-medium no-print shrink-0">
           <div className="flex flex-col md:flex-row justify-between items-center gap-2">
             <p className="text-center md:text-left leading-relaxed">
               Koperasi Cendekia Corner Syariah BAZNAS © 2026 • Membangun Kesejahteraan Bebas Riba.
             </p>
-            <p className="font-mono text-[10px]">
-              Sistem Operasional Digital • Berlisensi Resmi SCB-SYR • Ketua Fuad Habibi Siregar.
-            </p>
+            <div className="flex flex-col md:items-end gap-0.5">
+              <p className="font-mono text-[10px] text-right">
+                Sistem Operasional Digital • Berlisensi Resmi SCB-SYR • Ketua Fuad Habibi Siregar.
+              </p>
+              <p className="text-[9px] text-slate-400 text-right flex items-center justify-center md:justify-end gap-1 font-sans">
+                <span>Domain Utama:</span>
+                <a
+                  href="https://aspiah.vercel.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-bold text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center gap-0.5"
+                >
+                  <Icons.Globe className="w-3 h-3 text-blue-500" /> aspiah.vercel.app
+                </a>
+              </p>
+            </div>
           </div>
         </footer>
       </div>

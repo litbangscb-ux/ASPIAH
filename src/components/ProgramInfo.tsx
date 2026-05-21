@@ -20,17 +20,17 @@ interface ProgramInfoProps {
 export default function ProgramInfo({ onApplyWithSimulation }: ProgramInfoProps) {
   const [activeSectionId, setActiveSectionId] = useState(PROGRAM_SECTIONS[0].id);
 
-  // Simulation State
-  const [originalPrice, setOriginalPrice] = useState<number>(6500000);
-  const [downpayment, setDownpayment] = useState<number>(1500000);
-  const [months, setMonths] = useState<number>(10);
+  // Simulation State (Locked: Maksimal harga barang Rp 5 juta & tanpa uang muka, Jangka waktu/Tenor maksimal 1 tahun)
+  const [originalPrice, setOriginalPrice] = useState<number>(4500000);
+  const [months, setMonths] = useState<number>(12); // Pilihan jangka waktu maksimal 12 bulan (1 tahun)
+  const downpayment = 0; // Tanpa uang muka (DP Rp 0)
 
-  // Calculator logic matching the guidelines
+  // Calculator logic matching the guidelines (15% flat rate for 1 year)
   const billingCalculation = useMemo(() => {
-    const financingAmount = Math.max(0, originalPrice - downpayment);
-    // 1-6 months: 0.8%, 7-12 months: 1.0%
-    const rate = months <= 6 ? 0.8 : 1.0;
-    const marginAmount = Math.round(financingAmount * (rate / 100) * months);
+    const clampedPrice = Math.min(5000000, originalPrice);
+    const financingAmount = clampedPrice; // downpayment is 0
+    const rate = 15; // 15% flat per tahun
+    const marginAmount = Math.round(financingAmount * (rate / 100));
     const totalSellingPrice = financingAmount + marginAmount;
     const monthlyInstallment = months > 0 ? Math.round(totalSellingPrice / months) : 0;
 
@@ -41,7 +41,7 @@ export default function ProgramInfo({ onApplyWithSimulation }: ProgramInfoProps)
       totalSellingPrice,
       monthlyInstallment
     };
-  }, [originalPrice, downpayment, months]);
+  }, [originalPrice, months]);
 
   const activeSection = useMemo(() => {
     return PROGRAM_SECTIONS.find(s => s.id === activeSectionId) || PROGRAM_SECTIONS[0];
@@ -168,92 +168,77 @@ export default function ProgramInfo({ onApplyWithSimulation }: ProgramInfoProps)
           </p>
 
           <div className="space-y-5">
-            {/* Input: Harga Barang */}
+            {/* Input: Harga Barang (Terbatas Maksimal Rp 5.000.000) */}
             <div>
               <div className="flex justify-between items-center mb-2">
                 <label className="text-xs font-medium text-emerald-200 flex items-center gap-1">
-                  <Icons.ShoppingBag className="w-3.5 h-3.5" /> Harga Barang (Toko)
+                  <Icons.ShoppingBag className="w-3.5 h-3.5" /> Harga Barang (Toko) - Maks. 5 Jt
                 </label>
-                <span className="text-xs font-mono text-emerald-300">
-                  {formatRupiah(originalPrice)}
+                <span className="text-xs font-mono text-amber-300 font-bold bg-amber-450/10 px-2 py-0.5 rounded-md">
+                  {formatRupiah(Math.min(originalPrice, 5000000))}
                 </span>
               </div>
               <input
                 type="range"
                 min="500000"
-                max="25000000"
+                max="5000000"
                 step="100000"
-                value={originalPrice}
+                value={Math.min(originalPrice, 5000000)}
                 onChange={(e) => {
-                  const val = Number(e.target.value);
-                  setOriginalPrice(val);
-                  // Ensure downpayment is not exceeding the item price
-                  if (downpayment >= val) {
-                    setDownpayment(Math.max(0, val - 500000));
-                  }
+                  setOriginalPrice(Number(e.target.value));
                 }}
                 className="w-full h-1.5 bg-emerald-900 rounded-lg appearance-none cursor-pointer accent-amber-400"
               />
               <div className="flex justify-between text-[10px] text-emerald-400 font-mono mt-1">
-                <span>500 Ribu</span>
-                <span>12 Jt</span>
-                <span>25 Juta</span>
+                <span>Rp 500 Ribu</span>
+                <span>Rp 2.5 Juta</span>
+                <span>Rp 5 Juta (Maksimal)</span>
               </div>
             </div>
 
-            {/* Input: Downpayment / DP */}
+            {/* Input: Downpayment / DP - Terkunci tanpa uang muka */}
             <div>
               <div className="flex justify-between items-center mb-2">
                 <label className="text-xs font-medium text-emerald-200 flex items-center gap-1">
                   <Icons.ReceiptText className="w-3.5 h-3.5" /> Uang Muka / DP Pegawai
                 </label>
-                <span className="text-xs font-mono text-emerald-300">
-                  {formatRupiah(downpayment)} ({(originalPrice > 0 ? (downpayment / originalPrice) * 100 : 0).toFixed(0)}%)
+                <span className="text-xs font-mono text-emerald-300 font-bold bg-emerald-900/80 px-2 py-0.5 rounded-md">
+                  {formatRupiah(0)} (0%)
                 </span>
               </div>
-              <input
-                type="range"
-                min="0"
-                max={Math.max(0, originalPrice - 200000)}
-                step="50000"
-                value={downpayment}
-                onChange={(e) => setDownpayment(Number(e.target.value))}
-                className="w-full h-1.5 bg-emerald-900 rounded-lg appearance-none cursor-pointer accent-amber-400"
-              />
-              <div className="flex justify-between text-[10px] text-emerald-400 font-mono mt-1">
-                <span>Rp 0 (Tanpa DP)</span>
-                <span>Max (Harga - 200K)</span>
+              <div className="bg-emerald-900/40 p-3 rounded-xl border border-emerald-800 text-[11px] text-emerald-200 leading-relaxed font-sans">
+                📌 <strong className="text-white">Tanpa Uang Muka (DP Rp 0)</strong>: Seluruh harga perolehan barang akan dibiayai penuh 100% oleh Koperasi Syariah.
               </div>
             </div>
 
-            {/* Input: Jangka Waktu */}
+            {/* Input: Jangka Waktu Pembiayaan (Maksimal 1 Tahun) */}
             <div>
               <div className="flex justify-between items-center mb-2">
                 <label className="text-xs font-medium text-emerald-200 flex items-center gap-1">
-                  <Icons.CalendarDays className="w-3.5 h-3.5" /> Jangka Waktu Pembiayaan
+                  <Icons.CalendarDays className="w-3.5 h-3.5" /> Jangka Waktu (Maks. 1 Tahun)
                 </label>
-                <span className="text-xs font-mono text-amber-300 font-bold">
+                <span className="text-xs font-mono text-amber-300 font-bold bg-amber-450/20 px-2.5 py-0.5 rounded-md">
                   {months} Bulan
                 </span>
               </div>
-              <div className="grid grid-cols-6 gap-1 bg-emerald-900 p-1.5 rounded-xl">
-                {[1, 3, 6, 8, 10, 12].map((m) => (
+              <div className="grid grid-cols-5 gap-1.5 bg-emerald-950 p-1.5 rounded-xl border border-emerald-800">
+                {[3, 6, 8, 10, 12].map((m) => (
                   <button
                     key={m}
                     type="button"
                     onClick={() => setMonths(m)}
-                    className={`py-1 text-xs font-mono font-bold rounded-lg transition-all cursor-pointer ${
+                    className={`py-1.5 text-xs font-mono font-bold rounded-lg transition-all cursor-pointer ${
                       months === m
-                        ? 'bg-amber-400 text-emerald-950 shadow-md'
-                        : 'text-emerald-100 hover:bg-emerald-800'
+                        ? "bg-amber-400 text-emerald-950 shadow-md"
+                        : "text-emerald-100 hover:bg-emerald-800/60"
                     }`}
                   >
-                    {m}M
+                    {m} Bln
                   </button>
                 ))}
               </div>
               <p className="text-[10px] text-emerald-300/80 mt-1.5 text-center font-mono">
-                💡 <span className="underline">Skema Margin</span>: 1-6 Bulan = 0.8% | 7-12 Bulan = 1.0% flat per bulan.
+                💡 <span className="underline">Skema Margin</span>: Tetap 15% flat untuk jangka waktu pembiayaan (maksimal 1 tahun).
               </p>
             </div>
 

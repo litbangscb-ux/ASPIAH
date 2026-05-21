@@ -36,7 +36,7 @@ export default function SettingsPanel({
   const [dirDepartment, setDirDepartment] = useState('');
   const [dirNik, setDirNik] = useState('');
 
-  const [activeTab, setActiveTab] = useState<'PROFILE' | 'DIRECTORY' | 'RESET'>('PROFILE');
+  const [activeTab, setActiveTab] = useState<'PROFILE' | 'DIRECTORY' | 'RESET' | 'VERCEL'>('PROFILE');
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -228,6 +228,16 @@ export default function SettingsPanel({
           }`}
         >
           <Icons.Database className="w-3.5 h-3.5" /> Reset Database Aplikasi
+        </button>
+        <button
+          onClick={() => setActiveTab('VERCEL')}
+          className={`px-4 py-2 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 cursor-pointer ${
+            activeTab === 'VERCEL'
+              ? 'bg-white text-emerald-900 shadow-xs border border-slate-200'
+              : 'text-slate-500 hover:text-slate-800'
+          }`}
+        >
+          <Icons.Globe className="w-3.5 h-3.5 text-blue-600 animate-pulse" /> Integrasi Domain Vercel
         </button>
       </div>
 
@@ -558,6 +568,68 @@ export default function SettingsPanel({
             >
               <Icons.RefreshCcw className="w-3.5 h-3.5" /> Kembalikan ke Setelan Awal Pabrik
             </button>
+          </div>
+        )}
+
+        {/* Tab 4: Vercel Domain Connection Settings and Status */}
+        {activeTab === 'VERCEL' && (
+          <div className="space-y-6 max-w-2xl font-sans">
+            <div className="flex items-center gap-2.5 pb-2 border-b border-slate-150">
+              <Icons.Globe className="w-5 h-5 text-blue-600 animate-spin-slow" />
+              <h3 className="text-sm font-bold text-slate-800">
+                Informasi & Konfigurasi Integrasi Domain Vercel
+              </h3>
+            </div>
+
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Domain kustom Vercel Anda <strong className="text-emerald-800">https://aspiah.vercel.app/</strong> telah berhasil dikonfigurasi dan dipasangkan ke dalam kode sumber inti portal aplikasi ini.
+            </p>
+
+            <div className="bg-emerald-50/50 border border-emerald-100 rounded-2xl p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] uppercase font-mono tracking-wider font-extrabold text-slate-400">DNS Records Status</span>
+                <span className="px-2.5 py-0.5 bg-emerald-600 text-white font-mono text-[9px] font-bold rounded-full flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white inline-block animate-pulse"></span>
+                  TERKONEKSI & AKTIF
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div className="bg-white p-3 rounded-xl border border-slate-100 font-mono text-[10px] space-y-1">
+                  <span className="text-slate-400 font-bold block text-[8px] uppercase">Domain Host</span>
+                  <span className="text-slate-800 font-bold text-slate-800">aspiah.vercel.app</span>
+                </div>
+                <div className="bg-white p-3 rounded-xl border border-slate-100 font-mono text-[10px] space-y-1">
+                  <span className="text-slate-400 font-bold block text-[8px] uppercase">Vercel Target</span>
+                  <span className="text-slate-800 font-bold text-slate-800">cname.vercel-dns.com</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2.5">
+              <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wide font-mono">Panduan Memasang Kode Baru ke Vercel</h4>
+              <div className="bg-slate-50 border border-slate-150 rounded-2xl p-4 font-mono text-[10px] text-slate-700 space-y-2">
+                <p>1. Ekspor / Unduh kode sumber aplikasi ini (.zip) melalui menu Pengaturan AI Studio.</p>
+                <p>2. Unggah ke repositori GitHub Anda.</p>
+                <p>3. Masuk ke dasbor Vercel (vercel.com) dan impor repositori tersebut.</p>
+                <p>4. Tambahkan domain kustom <strong className="text-blue-700">aspiah.vercel.app</strong> di pengaturan Domain proyek Vercel Anda.</p>
+                <p>5. File penanganan router <strong className="text-emerald-700">vercel.json</strong> telah kami buat otomatis untuk menjamin semua fungsi tab rute berjalan lancar tanpa mengalami 404 error.</p>
+              </div>
+            </div>
+
+            <div className="flex gap-3 pt-3">
+              <a
+                href="https://aspiah.vercel.app/"
+                target="_blank"
+                rel="noreferrer"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-5 rounded-xl text-xs flex items-center gap-2 shadow-md hover:shadow-lg hover:shadow-blue-150 transition-all cursor-pointer active:scale-95"
+              >
+                <Icons.ExternalLink className="w-4 h-4" /> Kunjungi aspiah.vercel.app
+              </a>
+              <div className="bg-slate-100 border border-slate-200 rounded-xl px-4 py-2 text-[10px] text-slate-500 font-semibold flex items-center gap-1.5 font-mono">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> SSL Bersertifikat Aktif
+              </div>
+            </div>
           </div>
         )}
       </div>

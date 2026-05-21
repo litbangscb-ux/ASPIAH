@@ -257,7 +257,7 @@ export default function ApplicationList({
                     <div className="flex justify-between text-xs text-slate-500">
                       <span>Margin Koperasi:</span>
                       <span className="font-mono font-semibold text-emerald-800">
-                        {formatRupiah(app.goods.marginAmount)} ({app.goods.marginRate}%/bln)
+                        {formatRupiah(app.goods.marginAmount)} ({app.goods.marginRate}% Flat/Thn)
                       </span>
                     </div>
                     <div className="flex justify-between text-xs text-slate-500 font-medium pt-1 border-t border-slate-100">
@@ -581,7 +581,7 @@ export default function ApplicationList({
                           </div>
                           <div>
                             <label className="block text-[10px] font-semibold text-slate-500 mb-1">
-                              Konfirmasi Margin (% / Bulan)
+                              Konfirmasi Margin (% Flat/Tahun)
                             </label>
                             <input
                               type="number"

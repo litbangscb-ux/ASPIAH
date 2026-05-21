@@ -416,7 +416,7 @@ export default function DocViewer({
                     <div className="col-span-6 font-mono">: {formatRupiah(application.goods.financingAmount)}</div>
 
                     <div className="col-span-6 font-semibold">Margin Keuntungan Koperasi (Ribhun)</div>
-                    <div className="col-span-6 font-mono text-emerald-800 font-bold">: {formatRupiah(application.goods.marginAmount)} ({application.cooperativeVerification.finalMarginRate || application.goods.marginRate}% flat/bulan x {application.goods.months} bln)</div>
+                    <div className="col-span-6 font-mono text-emerald-800 font-bold">: {formatRupiah(application.goods.marginAmount)} ({application.cooperativeVerification.finalMarginRate || application.goods.marginRate}% Flat / Tahun)</div>
 
                     <div className="col-span-6 font-bold text-slate-900 border-t border-slate-300 pt-1">Total Harga Jual Koperasi</div>
                     <div className="col-span-6 font-mono text-emerald-950 font-bold border-t border-slate-300 pt-1">: {formatRupiah(application.goods.totalSellingPrice)} (Sesudah dikurang DP)</div>

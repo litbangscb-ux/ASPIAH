@@ -23,29 +23,30 @@ export default function NewApplicationForm({
   const [phone, setPhone] = useState('081299887766');
   const [salaryDeductionAuth, setSalaryDeductionAuth] = useState(false);
 
-  // Goods Details State
+  // Goods Details State (Locked: Maksimal harga barang Rp 5 juta & tanpa uang muka)
   const [itemName, setItemName] = useState('');
   const [specification, setSpecification] = useState('');
   const [supplierName, setSupplierName] = useState('');
-  const [originalPrice, setOriginalPrice] = useState(5000000);
-  const [downpayment, setDownpayment] = useState(1000000);
-  const [months, setMonths] = useState(6);
+  const [originalPrice, setOriginalPrice] = useState(4500000);
+  const [months, setMonths] = useState(12); // Pilihan jangka waktu maksimal 12 bulan (1 tahun)
+  const downpayment = 0; // Tanpa uang muka (DP Rp 0) sesuai instruksi kementerian
 
   // Load from simulation if exists
   useEffect(() => {
     if (initialSimulationParams) {
-      setOriginalPrice(initialSimulationParams.price);
-      setDownpayment(initialSimulationParams.dp);
-      setMonths(initialSimulationParams.months);
+      setOriginalPrice(Math.min(5000000, initialSimulationParams.price));
+      if (initialSimulationParams.months) {
+        setMonths(Math.min(12, initialSimulationParams.months));
+      }
     }
   }, [initialSimulationParams]);
 
   const [formStep, setFormStep] = useState(1);
 
-  // Calculations
-  const financingAmount = Math.max(0, originalPrice - downpayment);
-  const marginRate = months <= 6 ? 0.8 : 1.0;
-  const marginAmount = Math.round(financingAmount * (marginRate / 100) * months);
+  // Calculations (15% flat rate for 1 year)
+  const financingAmount = Math.min(5000000, originalPrice); // DP is 0
+  const marginRate = 15; // 15% flat per tahun
+  const marginAmount = Math.round(financingAmount * (marginRate / 100));
   const totalSellingPrice = financingAmount + marginAmount;
   const monthlyInstallment = months > 0 ? Math.round(totalSellingPrice / months) : 0;
 
@@ -68,6 +69,11 @@ export default function NewApplicationForm({
 
     if (!itemName || !supplierName || originalPrice <= 0) {
       alert('Mohon lengkapi detail barang dan toko rujukan.');
+      return;
+    }
+
+    if (originalPrice > 5000000) {
+      alert('Maksimal harga barang yang diajukan adalah Rp 5.000.000 sesuai kebijakan SOP.');
       return;
     }
 
@@ -340,55 +346,56 @@ export default function NewApplicationForm({
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 pt-2">
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                   <div>
                     <label className="block text-xs font-semibold text-slate-600 mb-1.5">
-                      Harga Barang Toko
+                      Harga Barang Toko (Maks. {formatRupiah(5000000)})
                     </label>
                     <input
                       type="number"
                       required
+                      min="500000"
+                      max="5000000"
                       value={originalPrice}
                       onChange={(e) => {
                         const val = parseInt(e.target.value) || 0;
-                        setOriginalPrice(val);
-                        if (downpayment >= val) {
-                          setDownpayment(Math.max(0, val - 200000));
-                        }
+                        setOriginalPrice(Math.min(5000000, val));
                       }}
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-700 focus:outline-hidden text-sm font-mono"
+                      placeholder="Masukkan harga barang"
                     />
+                    <p className="text-[10px] text-slate-400 mt-1">
+                      💡 Batas maksimal pengajuan pembiayaan sesuai SOP adalah Rp 5.000.000.
+                    </p>
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-slate-600 mb-1.5">
                       Uang Muka (DP)
                     </label>
-                    <input
-                      type="number"
-                      required
-                      value={downpayment}
-                      onChange={(e) => setDownpayment(parseInt(e.target.value) || 0)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-700 focus:outline-hidden text-sm font-mono"
-                      max={originalPrice - 100000}
-                    />
+                    <div className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-100/80 text-sm font-mono font-bold text-slate-500 flex justify-between items-center select-none">
+                      <span>Rp 0</span>
+                      <span className="text-[9px] font-mono bg-slate-350 text-slate-700 px-2 py-0.5 rounded leading-none">Tanpa DP (Terkunci)</span>
+                    </div>
+                    <p className="text-[10px] text-slate-400 mt-1">
+                      Koperasi mendanai 100% dari harga barang.
+                    </p>
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-600 mb-2">
-                    Jangka Waktu Cicilan
+                    Jangka Waktu Cicilan (Maks. 1 Tahun)
                   </label>
                   <select
                     value={months}
                     onChange={(e) => setMonths(Number(e.target.value))}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-hidden text-sm"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-700 focus:outline-hidden text-sm font-semibold bg-white text-slate-700"
                   >
-                    <option value={1}>1 Bulan (Margin 0.8% flat)</option>
-                    <option value={3}>3 Bulan (Margin 0.8% flat)</option>
-                    <option value={6}>6 Bulan (Margin 0.8% flat)</option>
-                    <option value={8}>8 Bulan (Margin 1.0% flat)</option>
-                    <option value={10}>10 Bulan (Margin 1.0% flat)</option>
-                    <option value={12}>12 Bulan (Margin 1.0% flat)</option>
+                    {[3, 6, 8, 10, 12].map((m) => (
+                      <option key={m} value={m}>
+                        {m} Bulan / Tenor {m === 12 ? "1 Tahun (Maksimal)" : `${m} Bln`}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -424,11 +431,11 @@ export default function NewApplicationForm({
 
                     <div className="flex justify-between">
                       <span>Persentase Margin Keuntungan:</span>
-                      <span className="font-semibold text-emerald-800">{marginRate}% / Bulan</span>
+                      <span className="font-semibold text-emerald-800">{marginRate}% / Tahun Flat</span>
                     </div>
 
                     <div className="flex justify-between">
-                      <span>Jumlah Margin ({months} Bulan):</span>
+                      <span>Jumlah Margin Keuntungan:</span>
                       <span className="font-mono text-emerald-800 font-semibold">
                         {formatRupiah(marginAmount)}
                       </span>
