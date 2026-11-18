@@ -9,14 +9,7 @@ export const PROGRAM_SECTIONS = [
     icon: "BookOpen",
     short: "Mengapa program pembiayaan syariah ini dibentuk untuk pegawai SCB.",
     content: [
-      "Dalam mendukung kesejahteraan pegawai dan civitas pesantren, koperasi memiliki peran tidak hanya sebagai unit usaha, tetapi juga sebagai sarana pelayanan dan tolong-menolong yang sesuai dengan prinsip syariah. Seiring perkembangan kebutuhan, pegawai seringkali membutuhkan fasilitas penunjang kerja maupun kebutuhan penting lainnya seperti:",
-      "• Laptop",
-      "• Handphone",
-      "• Tablet",
-      "• Perangkat penunjang pekerjaan",
-      "• Kebutuhan peralatan dan perlengkapan pendidikan dan produktivitas",
-      "• Barang produktif lainnya",
-      "Namun di sisi lain, akses pembiayaan di luar lembaga seringkali menggunakan sistem ribawi, bunga tinggi, atau mekanisme yang memberatkan. Oleh karena itu, Koperasi Cendekia Syariah merancang Program Pembiayaan Syariah Pegawai sebagai solusi pembiayaan yang:",
+      "Dalam mendukung kesejahteraan pegawai dan civitas pesantren, koperasi memiliki peran tidak hanya sebagai unit usaha, tetapi juga sebagai sarana pelayanan dan tolong-menolong yang sesuai dengan prinsip syariah. Seiring perkembangan kebutuhan, pegawai seringkali membutuhkan fasilitas penunjang kerja maupun kebutuhan penting lainnya yang halal, bermanfaat, dan diperbolehkan dalam syariat. Namun di sisi lain, akses pembiayaan di luar lembaga seringkali menggunakan sistem ribawi, bunga tinggi, atau mekanisme yang memberatkan. Oleh karena itu, Koperasi Cendekia Syariah merancang Program Pembiayaan Syariah Pegawai sebagai solusi pembiayaan yang:",
       "• Aman",
       "• Transparan",
       "• Ringan",
@@ -56,6 +49,46 @@ export const PROGRAM_SECTIONS = [
     ]
   },
   {
+    id: "persyaratan",
+    title: "Persyaratan Pengajuan",
+    icon: "UserCheck",
+    short: "Kriteria dan syarat wajib bagi peminjam.",
+    content: [
+      "Peminjam wajib:",
+      "• Pegawai aktif dengan masa kerja minimal 1 tahun.",
+      "• Memiliki track record yang baik",
+      "• Tidak memiliki pelanggaran berat",
+      "• Mendapat persetujuan manajemen",
+      "• Bersedia mengikuti sistem potong gaji otomatis",
+      "• Menandatangani akad syariah"
+    ]
+  },
+  {
+    id: "penilaian",
+    title: "Penilaian Kelayakan Pembiayaan",
+    icon: "ClipboardCheck",
+    short: "Kriteria dan aspek penilaian persetujuan pembiayaan.",
+    content: [
+      "Persetujuan pembiayaan dilakukan berdasarkan:",
+      "• Kinerja pegawai",
+      "• Kedisiplinan",
+      "• Amanah dan tanggung jawab",
+      "• Riwayat pembiayaan sebelumnya",
+      "• Masa kerja",
+      "• Pertimbangan manajemen"
+    ]
+  },
+  {
+    id: "batas-cicilan",
+    title: "Batas Maksimal Cicilan",
+    icon: "Percent",
+    short: "Aturan batas maksimal cicilan terhadap gaji bulanan.",
+    content: [
+      "Untuk menjaga kesehatan finansial pegawai:",
+      "Maksimal cicilan disarankan 30–35% dari gaji bulanan."
+    ]
+  },
+  {
     id: "ketentuan",
     title: "Ketentuan Umum",
     icon: "FileCheck",
@@ -82,15 +115,63 @@ export const PROGRAM_SECTIONS = [
   },
   {
     id: "skema",
-    title: "Skema Pembiayaan & Margin",
+    title: "Skema Pembiayaan",
     icon: "Layers",
-    short: "Informasi persentase margin keuntungan pembiayaan koperasi.",
+    short: "Tahapan alur proses pengajuan pembiayaan syariah.",
     content: [
-      "Pembiayaan ini bersifat murni jual beli dengan margin keuntungan koperasi yang sangat kompetitif dan bersahabat.",
-      "Ketentuan Margin Keuntungan Koperasi sebagai berikut:",
-      "• Jangka Waktu (Tenor): Tenor pembiayaan dikunci tetap selama 1 tahun (12 bulan). Tidak ada pilihan jangka waktu lainnya.",
-      "• Margin Keuntungan Koperasi: Margin flat sebesar 15% dari pokok nilai pembiayaan selama jangka waktu 1 tahun tersebut.",
-      "Keuntungan ini dirumuskan terbuka secara transparan sejak awal. Sebagai contoh: Jika Anda melakukan pembiayaan laptop dengan sisa Rp 10.000.000, maka margin keuntungan koperasi adalah Rp 1.500.000 (15%). Total harga jual koperasi adalah Rp 11.500.000, dan angsuran bulanan tetap selama 1 tahun adalah Rp 11.500.000 / 12 = Rp 958.333 per bulan."
+      "1. Pegawai Mengajukan Permohonan",
+      "Pegawai mengajukan:",
+      "• Nama barang",
+      "• Harga barang",
+      "• Tujuan penggunaan",
+      "• Estimasi tenor cicilan",
+      "----------------------------------------",
+      "2. Verifikasi Koperasi",
+      "Koperasi melakukan pengecekan:",
+      "• Track record",
+      "• Kemampuan pembayaran",
+      "• Riwayat cicilan",
+      "----------------------------------------",
+      "3. Persetujuan Manajemen",
+      "Manajemen memberikan ACC berdasarkan:",
+      "• Kinerja",
+      "• Kedisiplinan",
+      "• Kepentingan kebutuhan",
+      "----------------------------------------",
+      "4. Koperasi Membeli Barang",
+      "Koperasi membeli barang yang diajukan pegawai.",
+      "----------------------------------------",
+      "5. Akad Murabahah",
+      "Koperasi menjual kembali barang kepada pegawai dengan margin yang telah disepakati.",
+      "----------------------------------------",
+      "6. Cicilan Bulanan",
+      "Pegawai membayar melalui sistem potong gaji otomatis."
+    ]
+  },
+  {
+    id: "skema-margin",
+    title: "Skema Margin & Simulasi",
+    icon: "Calculator",
+    short: "Informasi skema margin dan contoh perhitungan simulasi.",
+    content: [
+      "Skema Margin:",
+      "• 12 bulan : 15%",
+      "• 10 bulan : 15%",
+      "• 08 bulan : 15%",
+      "• 06 bulan : 15%",
+      "• 03 bulan : 15%",
+      "Margin ditentukan di awal akad dan tidak berubah selama masa pembiayaan.",
+      "----------------------------------------",
+      "Contoh Simulasi:",
+      "Laptop Rp5.000.000",
+      "Tenor:",
+      "• 12 bulan",
+      "Margin:",
+      "• 15%",
+      "Harga jual:",
+      "• Rp5.750.000",
+      "Cicilan:",
+      "• Rp479.000/bulan"
     ]
   },
   {
@@ -99,20 +180,60 @@ export const PROGRAM_SECTIONS = [
     icon: "Coins",
     short: "Tata cara pelunasan angsuran bulanan pembiayaan pegawai.",
     content: [
-      "Guna mempermudah administrasi dan meminimalisir risiko kelupaan yang berujung denda sosial, pembayaran dilakukan secara autodebet/potong gaji langsung melui Bendahara Keuangan Sekolah Cendekia BAZNAS.",
-      "Pegawai wajib menandatangani Surat Kuasa Potong Gaji (Salary Deduction Authorization) yang terdapat di dalam lembar permohonan pembiayaan.",
-      "Pemotongan angsuran per bulan akan dilakukan tepat saat tanggal gajian pegawai setiap bulannya sampai limit jangka waktu pelunasan akad berakhir."
+      "Pembayaran dilakukan melalui:",
+      "POTONG GAJI OTOMATIS",
+      "yang dikoordinasikan bersama:",
+      "• HRD",
+      "• Bagian Keuangan",
+      "• Koperasi Cendekia Syariah",
+      "----------------------------------------",
+      "Alur Pembayaran:",
+      "• Pengajuan Disetujui",
+      "↓",
+      "• Akad Ditandatangani",
+      "↓",
+      "• Persetujuan Potong Gaji",
+      "↓",
+      "• Data Diserahkan ke HRD & Keuangan",
+      "↓",
+      "• Potongan Gaji Otomatis Tiap Bulan",
+      "↓",
+      "• Dana Masuk ke Koperasi"
     ]
   },
   {
     id: "tambahan",
-    title: "Ketentuan Tambahan & Pengelolaan Untung",
+    title: "Ketentuan Tambahan",
     icon: "Briefcase",
-    short: "Informasi seputar kepemilikan barang dan sisa hasil usaha koperasi.",
+    short: "Informasi seputar ketentuan tambahan pembiayaan.",
     content: [
-      "• Kepemilikan Barang: Segera setelah akad Murabahah ditandatangani dan barang diserahterimakan, hak milik barang sepenuhnya beralih dari koperasi ke pegawai, namun menjadi jaminan moral untuk diselesaikan cicilannya.",
-      "• Larangan Pemindahtanganan: Pegawai dilarang menjual, menghibahkan, atau menggadaikan barang pembiayaan sebelum masa angsuran dinyatakan lunas secara formal oleh manajemen koperasi.",
-      "• Distribusi Sisa Hasil Usaha (SHU): Seluruh margin keuntungan pembiayaan yang terkumpul akan dibukukan dalam Laporan Keuangan Tahunan Koperasi Cendekia Corner Syariah, dan 40% - 60% keuntungan bersih dialokasikan untuk dibagikan kembali kepada Pegawai yang menjadi anggota aktif dalam bentuk SHU Koperasi di Rapat Anggota Tahunan (RAT)."
+      "1. Tidak Diperbolehkan Double Pembiayaan",
+      "Pegawai yang masih memiliki cicilan aktif tidak diperbolehkan mengambil pembiayaan baru sebelum pembiayaan sebelumnya selesai.",
+      "----------------------------------------",
+      "2. Keterlambatan Pembayaran",
+      "Karena menggunakan sistem potong gaji otomatis, keterlambatan diharapkan dapat diminimalisasi.",
+      "Jika terjadi kendala:",
+      "• Akan dilakukan musyawarah",
+      "• Tidak menggunakan denda berbunga",
+      "----------------------------------------",
+      "3. Pegawai Resign / Berhenti",
+      "Sisa kewajiban:",
+      "• Diselesaikan melalui hak keuangan terakhir ATAU",
+      "• Kesepakatan pelunasan khusus"
+    ]
+  },
+  {
+    id: "pengelolaan-keuntungan",
+    title: "Pengelolaan Keuntungan",
+    icon: "TrendingUp",
+    short: "Alokasi dan pemanfaatan keuntungan margin pembiayaan.",
+    content: [
+      "Keuntungan margin digunakan untuk:",
+      "• Penguatan modal koperasi",
+      "• Dana cadangan risiko",
+      "• Pengembangan program koperasi",
+      "• SHU koperasi",
+      "• Dana sosial/ta’awun"
     ]
   },
   {
@@ -121,10 +242,10 @@ export const PROGRAM_SECTIONS = [
     icon: "Heart",
     short: "Nilai kebaikan syariah yang dijunjung tinggi bersama.",
     content: [
-      "• KEHALALAN: Terhindar dari sanksi riba dan dosa bunga pinjaman.",
-      "• TRANSFARI: Terbuka dan tidak ada jaminan sitaan paksa yang merugikan sepihak.",
-      "• KEKELUARGAAN: Apabila pegawai wafat atau mengalami cacat tetap dalam masa bakti, koperasi akan menyelesaikan sisa angsuran secara kekeluargaan melalui Dana Kebajikan/Takaful internal koperasi.",
-      "• DARI ANGGOTA, UNTUK ANGGOTA: Margin profit koperasi ujungnya akan kembali dinikmati bersama oleh para pengajar Sekolah Cendekia BAZNAS sebagai pemilik koperasi."
+      "• Tolong-menolong dalam kebaikan. Poin ini berlandaskan prinsip ta'awun (saling membantu) dalam Islam. Dana yang dikelola tidak semata-mata mencari keuntungan komersial, melainkan menjadi sarana solidaritas bagi anggota yang membutuhkan bantuan modal atau kebutuhan mendesak.",
+      "• Menghindari praktik riba. Program ini menggunakan akad-akad sesuai syariat Islam, seperti jual beli dengan margin yang disepakati (murabahah), bagi hasil (mudharabah), atau pinjaman kebajikan tanpa tambahan (qardhul hasan). Cara ini melindungi peserta dari jeratan bunga pinjaman konvensional maupun rentenir yang memberatkan.",
+      "• Mendukung kesejahteraan keluarga pesantren. Akses pembiayaan yang adil membantu guru, staf, maupun wali santri memenuhi kebutuhan keluarga atau mengembangkan usaha mikro. Ketika ekonomi keluarga stabil, proses pendidikan dan pengabdian di pesantren dapat berjalan lebih tenang.",
+      "• Menguatkan ekonomi syariah di lingkungan lembaga. Perputaran dana yang dikelola secara internal menciptakan kemandirian finansial bagi pesantren. Langkah ini sekaligus membangun ekosistem ekonomi halal yang sehat dan menjadi sarana edukasi praktik keuangan syariah secara nyata bagi warga lembaga."
     ]
   }
 ];
