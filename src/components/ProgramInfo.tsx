@@ -116,15 +116,56 @@ export default function ProgramInfo({ onApplyWithSimulation }: ProgramInfoProps)
             </div>
           </div>
 
-          <div className="space-y-4 text-slate-600 text-sm leading-relaxed whitespace-pre-line font-sans">
+          <div 
+            className="space-y-3.5 text-slate-800 text-[15px] leading-relaxed"
+            style={{ fontFamily: '"Times New Roman", Times, serif' }}
+          >
             {Array.isArray(activeSection.content) ? (
-              activeSection.content.map((para, i) => (
-                <p key={i} className={para.startsWith('•') || para.startsWith('1.') || para.startsWith('Jangka') ? 'pl-4 border-l-2 border-emerald-200 py-0.5 my-1.5 font-medium' : ''}>
-                  {para}
-                </p>
-              ))
+              activeSection.content.map((para, i) => {
+                if (para.includes('----------------------------------------') || para === '----------------------------------------') {
+                  return <hr key={i} className="my-4 border-emerald-200/60" />;
+                }
+                if (para === '⬇' || para === '↓') {
+                  return (
+                    <div key={i} className="flex justify-center my-1.5 text-emerald-700">
+                      <Icons.ArrowDown className="w-4 h-4 animate-bounce" />
+                    </div>
+                  );
+                }
+                const isStepHeader = /^\d+\.\s/.test(para);
+                const isBullet = para.startsWith('•') || para.startsWith('✅') || para.startsWith('❌');
+                const isHeading = para.endsWith(':') || para === 'PEMOTONG GAJI OTOMATIS (AUTODEBET PAYROLL)' || para === 'Skema Margin Pembiayaan:' || para === 'Ilustrasi Contoh Simulasi Pembiayaan:';
+
+                if (isStepHeader) {
+                  return (
+                    <div key={i} className="bg-white/95 p-3.5 rounded-xl border border-emerald-100 shadow-xs font-bold text-emerald-900 mt-2 text-left" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
+                      {para}
+                    </div>
+                  );
+                }
+                if (isBullet) {
+                  return (
+                    <div key={i} className="flex items-start gap-2.5 pl-3 py-1 text-slate-800 text-left" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
+                      <span className="text-emerald-700 font-bold mt-0.5">•</span>
+                      <span className="flex-1 text-justify">{para.replace(/^[•✅❌]\s*/, '')}</span>
+                    </div>
+                  );
+                }
+                if (isHeading) {
+                  return (
+                    <h4 key={i} className="font-bold text-slate-900 mt-4 mb-1 text-left tracking-wide uppercase text-sm" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
+                      {para}
+                    </h4>
+                  );
+                }
+                return (
+                  <p key={i} className="text-slate-800 text-justify leading-relaxed" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
+                    {para}
+                  </p>
+                );
+              })
             ) : (
-              <p>{activeSection.content}</p>
+              <p className="text-slate-800 text-justify leading-relaxed" style={{ fontFamily: '"Times New Roman", Times, serif' }}>{activeSection.content}</p>
             )}
           </div>
         </motion.div>
