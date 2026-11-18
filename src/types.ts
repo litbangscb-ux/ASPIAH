@@ -66,6 +66,12 @@ export interface FinancingApplication {
   managementRecommendation: ManagementRecommendation;
   cooperativeVerification: CooperativeVerification;
   akadMurabahah: AkadMurabahah;
+  approvedAmount?: number; // Total nilai yang disetujui (bisa full atau disesuaikan)
+  purchaseSubmission?: {
+    storeAddressOrLink: string;
+    notes?: string;
+    submittedAt?: string;
+  };
 }
 
 export interface ProgramInfoSection {

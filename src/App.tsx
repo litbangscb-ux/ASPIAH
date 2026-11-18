@@ -60,7 +60,7 @@ export default function App() {
   });
 
   const [currentRole, setCurrentRole] = useState<UserRole>(currentUser?.role || 'COOPERATIVE');
-  const [activeTab, setActiveTab] = useState<'INFO' | 'ADD' | 'LIST' | 'DOC' | 'SETTINGS'>('INFO');
+  const [activeTab, setActiveTab] = useState<'INFO' | 'ADD' | 'LIST' | 'DOC' | 'ARCHIVE' | 'SETTINGS'>('INFO');
 
   // Applications Local Storage persistence
   const [applications, setApplications] = useState<FinancingApplication[]>([]);
@@ -185,6 +185,12 @@ export default function App() {
         icon: Icons.Activity,
         desc: 'Verifikasi Berkas',
         badge: applications.length > 0 ? applications.length : undefined
+      },
+      {
+        id: 'ARCHIVE' as const,
+        label: 'Arsip & Unduhan',
+        icon: Icons.FolderArchive,
+        desc: 'Berkas Resmi PDF'
       },
       {
         id: 'SETTINGS' as const,
@@ -634,6 +640,74 @@ export default function App() {
                     setActiveTab('LIST');
                   }}
                 />
+              )}
+
+              {activeTab === 'ARCHIVE' && (
+                <div className="bg-white rounded-3xl p-6 md:p-8 shadow-xs border border-slate-100 max-w-4xl mx-auto">
+                  <div className="mb-6 pb-6 border-b border-slate-100">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full inline-block">
+                      Pusat Dokumen Resmi
+                    </span>
+                    <h2 className="text-2xl font-display font-bold text-slate-800 mt-2">
+                      Arsip Berkas & Unduhan Koperasi
+                    </h2>
+                    <p className="text-slate-500 text-xs mt-1">
+                      Unduh seluruh berkas administratif, lembar rekomendasi, keputusan, dan akad murabahah resmi Koperasi Cendekia Syariah (Cendekia Finance).
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {[
+                      {
+                        title: "Surat Permohonan Pembiayaan Syariah",
+                        desc: "Formulir permohonan resmi pemohon pegawai",
+                        file: "/assets/aistudio/SURAT_PERMOHONAN_PEMBIAYAAN_SYARIAH_84bb84fd.pdf"
+                      },
+                      {
+                        title: "Lembar Rekomendasi Atasan / Manajemen",
+                        desc: "Form penilaian dan rekomendasi atasan unit kerja",
+                        file: "/assets/aistudio/REKOMENDASI_ATASAN_7d56605f.pdf"
+                      },
+                      {
+                        title: "Surat Keputusan Kepala Sekolah",
+                        desc: "Lembar persetujuan administratif internal Kepala Sekolah",
+                        file: "/assets/aistudio/KEPUTUSAN_KEPALA_SEKOLAH_74f5dd20.pdf"
+                      },
+                      {
+                        title: "Verifikasi dan Keputusan Koperasi",
+                        desc: "Lembar evaluasi, nominal disetujui, & keputusan koperasi",
+                        file: "/assets/aistudio/VERIFIKASI_DAN_KEPUTUSAN_KOPERASI_61d0720e.pdf"
+                      },
+                      {
+                        title: "Surat Akad Murabahah",
+                        desc: "Naskah perjanjian jual beli syariah lengkap dengan pasal-pasal",
+                        file: "/assets/aistudio/SURAT_AKAD_MURABAHAH_5de09cd7.pdf"
+                      },
+                      {
+                        title: "Buku Program Pembiayaan Syariah",
+                        desc: "Panduan lengkap SOP, skema, dan nilai luhur program Cendekia Finance",
+                        file: "/assets/aistudio/PROGRAM_PEMBIAYAAN_SYARIAH_PEGAWAI_dc442b7f.pdf"
+                      }
+                    ].map((doc, idx) => (
+                      <div key={idx} className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 shadow-xs flex items-center justify-between gap-4">
+                        <div className="min-w-0">
+                          <h4 className="text-xs font-bold text-slate-800 font-display">{doc.title}</h4>
+                          <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">{doc.desc}</p>
+                        </div>
+                        <a
+                          href={doc.file}
+                          download
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="shrink-0 bg-emerald-900 hover:bg-emerald-800 text-amber-300 p-2.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer"
+                          title="Unduh PDF Resmi"
+                        >
+                          <Icons.Download className="w-4 h-4" /> Unduh PDF
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               )}
 
               {activeTab === 'SETTINGS' && (

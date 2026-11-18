@@ -245,6 +245,25 @@ export const PROGRAM_SECTIONS = [
     ]
   },
   {
+    id: "status-pengajuan",
+    title: "Status & Pelacakan Pengajuan",
+    icon: "Activity",
+    short: "Informasi status persetujuan, nominal disetujui, dan pengiriman toko.",
+    content: [
+      "1. Pelacakan Status Pembiayaan",
+      "Pemohon dapat memantau secara real-time status pengajuan pembiayaan (apakah sedang diverifikasi, disetujui, atau memerlukan penyesuaian) langsung melalui menu Monitoring di aplikasi.",
+      "----------------------------------------",
+      "2. Catatan Nominal Persetujuan (Full / Penyesuaian)",
+      "Pihak manajemen dan koperasi akan memberikan catatan evaluasi apakah pengajuan disetujui secara penuh (100% dari nilai ajuan) atau disetujui dengan penyesuaian nominal tertentu berdasarkan kapasitas finansial dan rasio cicilan gaji pemohon.",
+      "----------------------------------------",
+      "3. Pengiriman Alamat Toko / Tautan Pembelian Online",
+      "Jika pengajuan telah dinyatakan DISETUJUI, pemohon dapat langsung mengirimkan informasi detail alamat toko offline atau tautan pembelian online (e-commerce) barang yang dituju melalui sistem aplikasi, agar pihak koperasi dapat segera memproses pembelian barang.",
+      "----------------------------------------",
+      "4. Pelaksanaan Akad Murabahah",
+      "Setelah barang berhasil dipesan/disediakan oleh koperasi, pemohon akan diundang untuk menghadiri penandatanganan Naskah Akad Murabahah bersama Ketua Koperasi dan saksi."
+    ]
+  },
+  {
     id: "penutup",
     title: "Penutup",
     icon: "Flag",

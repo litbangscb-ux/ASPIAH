@@ -117,37 +117,55 @@ export default function ProgramInfo({ onApplyWithSimulation }: ProgramInfoProps)
           </div>
 
           <div 
-            className="space-y-3.5 text-slate-800 text-[15px] leading-relaxed"
+            className="space-y-1 text-slate-800 text-[15px] leading-snug"
             style={{ fontFamily: '"Times New Roman", Times, serif' }}
           >
             {Array.isArray(activeSection.content) ? (
               activeSection.content.map((para, i) => {
                 if (para.includes('----------------------------------------') || para === '----------------------------------------') {
-                  return <hr key={i} className="my-4 border-emerald-200/60" />;
+                  return <hr key={i} className="my-2 border-emerald-200/60" />;
                 }
                 if (para === '⬇' || para === '↓') {
                   return (
-                    <div key={i} className="flex justify-center my-1.5 text-emerald-700">
+                    <div key={i} className="flex justify-center my-1 text-emerald-700">
                       <Icons.ArrowDown className="w-4 h-4 animate-bounce" />
                     </div>
                   );
                 }
                 const isStepHeader = /^\d+\.\s/.test(para);
-                const isBullet = para.startsWith('•') || para.startsWith('✅') || para.startsWith('❌');
-                const isHeading = para.endsWith(':') || para === 'PEMOTONG GAJI OTOMATIS (AUTODEBET PAYROLL)' || para === 'Skema Margin Pembiayaan:' || para === 'Ilustrasi Contoh Simulasi Pembiayaan:';
+                const isApprovedHeader = para.startsWith('✅');
+                const isRejectedHeader = para.startsWith('❌');
+                const isBullet = para.startsWith('•');
+                const isHeading = (para.endsWith(':') && para.length < 50) || para === 'PEMOTONG GAJI OTOMATIS (AUTODEBET PAYROLL)';
 
                 if (isStepHeader) {
                   return (
-                    <div key={i} className="bg-white/95 p-3.5 rounded-xl border border-emerald-100 shadow-xs font-bold text-emerald-900 mt-2 text-left" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
+                    <div key={i} className="bg-white/95 p-2 rounded-xl border border-emerald-100 shadow-xs font-bold text-emerald-900 mt-1 text-left" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
                       {para}
+                    </div>
+                  );
+                }
+                if (isApprovedHeader) {
+                  return (
+                    <div key={i} className="bg-emerald-100/80 p-2.5 rounded-xl border border-emerald-300 text-emerald-950 font-bold mt-2 text-left flex items-center gap-2" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
+                      <span>✅</span>
+                      <span>{para.replace('✅ ', '')}</span>
+                    </div>
+                  );
+                }
+                if (isRejectedHeader) {
+                  return (
+                    <div key={i} className="bg-rose-100/80 p-2.5 rounded-xl border border-rose-300 text-rose-950 font-bold mt-3 text-left flex items-center gap-2" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
+                      <span>❌</span>
+                      <span>{para.replace('❌ ', '')}</span>
                     </div>
                   );
                 }
                 if (isBullet) {
                   return (
-                    <div key={i} className="flex items-start gap-2.5 pl-3 py-1 text-slate-800 text-left" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
-                      <span className="text-emerald-700 font-bold mt-0.5">•</span>
-                      <span className="flex-1 text-justify">{para.replace(/^[•✅❌]\s*/, '')}</span>
+                    <div key={i} className="flex items-start gap-2 pl-3 py-0.25 text-slate-800 text-left" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
+                      <span className="text-emerald-700 font-bold mt-0">•</span>
+                      <span className="flex-1 text-justify">{para.replace(/^•\s*/, '')}</span>
                     </div>
                   );
                 }
