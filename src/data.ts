@@ -15,6 +15,7 @@ export const PROGRAM_SECTIONS = [
       "• Tablet",
       "• Perangkat penunjang pekerjaan",
       "• Kebutuhan peralatan dan perlengkapan pendidikan dan produktivitas",
+      "• Barang produktif lainnya",
       "Namun di sisi lain, akses pembiayaan di luar lembaga seringkali menggunakan sistem ribawi, bunga tinggi, atau mekanisme yang memberatkan. Oleh karena itu, Koperasi Cendekia Syariah merancang Program Pembiayaan Syariah Pegawai sebagai solusi pembiayaan yang:",
       "• Aman",
       "• Transparan",
